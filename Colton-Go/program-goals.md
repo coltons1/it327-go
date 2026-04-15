@@ -24,7 +24,6 @@ import expenses from a csv file
     - how much have you spent in a specific time frame?
 
 - stretch
-    - import expenses from a csv file
     - sum expenses by month or custom date range
     - add incomes to enable money in/money out tracking. 
     - budgeting?

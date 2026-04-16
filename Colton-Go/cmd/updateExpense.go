@@ -13,16 +13,19 @@ import (
 var updateExpenseCmd = &cobra.Command{
 	Use:   "updateExpense",
 	Short: "Update an existing expense.",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Args: func(cmd *cobra.Command, args []string) error {
+		// numOfArgs := len(args)
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+		// command layout would be ./cli updateExpense [id] [newdesc] [newcost]
+		// or [id] [newdesc]
+		// or [id] [newcost]
+		return fmt.Errorf("ball out")
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("updateExpense called")
-		//THIS IS WHERE THE BODY OF THE FUNCTION WILL BE
-		fmt.Println(filedata)
+
+		// need to take in some parameters, need ID, what item they want to edit, and what they want to change.
+
 	},
 }
 

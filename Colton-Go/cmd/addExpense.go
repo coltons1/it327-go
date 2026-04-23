@@ -54,7 +54,6 @@ var addExpenseCmd = &cobra.Command{
 		expenseCount = readExpenseCount(keyValFile)
 		var exp Expense = Expense{expID: expenseCount, description: "", price: 0.0, date: time.Now()}
 		exp.expID = expenseCount + 1
-		fmt.Println(exp.description)
 
 		//use positional arguments to take in description and price.
 		var inDesc string = args[0]
@@ -69,8 +68,6 @@ var addExpenseCmd = &cobra.Command{
 		var inPrice float32 = float32(f)
 		exp.description = inDesc
 		exp.price = inPrice
-
-		fmt.Printf("ID is %v, Description is %v, Price is %v, Date is %v\n", exp.expID, exp.description, exp.price, exp.date)
 
 		//need to write to expenses file.
 		file, err := os.OpenFile(filePath, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
@@ -92,8 +89,6 @@ var addExpenseCmd = &cobra.Command{
 		if err := writer.Error(); err != nil {
 			log.Fatal("Flush failed:", err)
 		}
-
-		fmt.Println("Wrote to file.")
 		listExpensesCmd.Run(cmd, []string{})
 	},
 }

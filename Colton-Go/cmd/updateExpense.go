@@ -125,7 +125,7 @@ var updateExpenseCmd = &cobra.Command{
 		}
 
 		fmt.Printf("Expense %q updated successfully.\n", targetID)
-
+		listExpensesCmd.Run(cmd, []string{})
 	},
 }
 

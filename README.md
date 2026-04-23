@@ -13,11 +13,16 @@ A group project assignment covering an unfamilliar language, Go.
 
 
 ### Intermediate
-1. Program 1
-2. Program 2
-3. Program 3
-4. Program 4
-5. Program 5
+1. Brad
+2. Colton
+    #### CLI Expense Tracker
+     This program is a command line expense tracker, built using Go's extensive external package collection. Specifically, Cobra-CLI to 
+     make new commands, tracking and validating arguments, and all other command line features easy to implement. This tool allows you to
+     add, read, update, and remove expenses consisting of description and cost. It simply uses a csv file for storing information such as 
+     expense ID, description, cost, and date created. 
+3. Kyle
+4. Kirby
+5. Lucas
 
 ### Substantive
 1. Substantive Program

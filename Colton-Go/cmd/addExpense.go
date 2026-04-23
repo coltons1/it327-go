@@ -94,7 +94,7 @@ var addExpenseCmd = &cobra.Command{
 		}
 
 		fmt.Println("Wrote to file.")
-
+		listExpensesCmd.Run(cmd, args)
 	},
 }
 

@@ -7,7 +7,6 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
-	"strings"
 	"text/tabwriter"
 	"time"
 
@@ -39,15 +38,8 @@ to quickly create a Cobra application.`,
 		w := tabwriter.NewWriter(os.Stdout, 0, 4, 4, ' ', 0)
 		fmt.Fprintln(w, "ID\tDESC\tPRICE\tDATE")
 		for i := 0; i < len(filedata); i++ {
-
 			raw_time := filedata[i][3]
-			if i := strings.Index(raw_time, " m="); i != -1 {
-				raw_time = raw_time[:i]
-			}
-
-			// now just this:  2026-04-10 17:20:23.3072645 -0500 CDT
-			layout := "2006-05-15 15:04:05.9999999 -0700 MST"
-			t, err := time.Parse(layout, raw_time)
+			t, err := time.Parse(time.RFC3339, raw_time)
 			if err != nil {
 				panic(err)
 			}

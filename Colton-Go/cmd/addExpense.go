@@ -69,7 +69,6 @@ var addExpenseCmd = &cobra.Command{
 		var inPrice float32 = float32(f)
 		exp.description = inDesc
 		exp.price = inPrice
-		exp.date = time.Now()
 
 		fmt.Printf("ID is %v, Description is %v, Price is %v, Date is %v\n", exp.expID, exp.description, exp.price, exp.date)
 
@@ -78,8 +77,9 @@ var addExpenseCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal("Couldn't access file.")
 		}
+		defer file.Close()
 
-		var record []string = []string{strconv.FormatInt(int64(exp.expID), 10), exp.description, strconv.FormatFloat(float64(exp.price), 'f', 2, 32), exp.date.String()}
+		var record []string = []string{strconv.FormatInt(int64(exp.expID), 10), exp.description, strconv.FormatFloat(float64(exp.price), 'f', 2, 32), exp.date.Format(time.RFC3339)}
 		writer := csv.NewWriter(file)
 
 		writeExpenseCount(keyValFile, exp.expID)
@@ -94,7 +94,7 @@ var addExpenseCmd = &cobra.Command{
 		}
 
 		fmt.Println("Wrote to file.")
-		listExpensesCmd.Run(cmd, args)
+		listExpensesCmd.Run(cmd, []string{})
 	},
 }
 

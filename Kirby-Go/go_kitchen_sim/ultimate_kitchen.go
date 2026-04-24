@@ -31,7 +31,7 @@ func main() {
 	//Create order slice to keep track of selected orders
 	order := []meal{}
 
-	//Testing TUI from promptui (example taken from and
+	//TUI example taken from and
 	// modified from promptui's Github page github.com/manifoldco/promptui)
 	menuTemplate := &promptui.SelectTemplates{
 		Active:   "\u25B6 {{ printf \"%v - %v\" .MealName .CookTime}}",

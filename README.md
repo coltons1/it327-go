@@ -22,7 +22,14 @@ A group project assignment covering an unfamilliar language, Go.
      expense ID, description, cost, and date created. 
 3. Kyle
 4. Kirby
-5. Lucas
+   #### Kitchen Simulator - "Ultimate Kitchen"
+    This program is run in the command line and allows the user to choose as many menu items as they would like from the scrollable list and
+    then, after choosing to finish their selection, the program simulates a real kitchen, where only so many meals are able to be worked on at
+    once. In the case of this program, only 3 meals are able to be made at a time, and the program will only start making the fourth meal and
+    onwards once the first, second, third, and so on, meals have been completed. This program was built with showcasing Go's ability to easily
+    and effectively perform concurrency and is displayed via the print statements that show when each meal order item is completed and how long
+    the order item took to complete in total.
+6. Lucas
 
 ### Substantive
 1. Substantive Program

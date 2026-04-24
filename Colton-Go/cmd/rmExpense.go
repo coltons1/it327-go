@@ -103,7 +103,7 @@ var rmExpenseCmd = &cobra.Command{
 		}
 
 		fmt.Println("Expense removed successfully")
-
+		listExpensesCmd.Run(cmd, []string{})
 	},
 }
 

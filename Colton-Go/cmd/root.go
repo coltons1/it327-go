@@ -48,7 +48,7 @@ func Setup() {
 	//attempt to open the file at the filepath, if the file does not exist log the error.
 	file, err := os.Open(filePath)
 	if err != nil {
-		fmt.Println("File doesn't exist, creating new file.")
+		//fmt.Println("File doesn't exist, creating new file.")
 		//handle the file not existing here
 		data := []byte("")
 		err = os.WriteFile(filePath, data, 0644)
@@ -57,13 +57,9 @@ func Setup() {
 		}
 	} else {
 		//file does exist!!
-		filedata, err := csv.NewReader(file).ReadAll()
+		_, err := csv.NewReader(file).ReadAll()
 		if err != nil {
 			log.Fatal(err)
-		} else {
-			fmt.Println("File does exist, printing contents.")
-			fmt.Println(filedata)
-			fmt.Print("\n")
 		}
 	}
 
@@ -82,10 +78,10 @@ func Setup() {
 		if err != nil {
 			log.Fatal(err)
 		} else {
-			fmt.Println("File does exist, printing key val data.")
-			fmt.Println(keyValData)
+			//fmt.Println("File does exist, printing key val data.")
+			//fmt.Println(keyValData)
 			expenseCount, err = strconv.ParseInt(keyValData[0][0], 10, 32)
-			fmt.Print("\n")
+			//fmt.Print("\n")
 		}
 	}
 

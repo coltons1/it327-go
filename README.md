@@ -21,6 +21,7 @@ A group project assignment covering an unfamilliar language, Go.
      add, read, update, and remove expenses consisting of description and cost. It simply uses a csv file for storing information such as 
      expense ID, description, cost, and date created. 
 3. Kyle
+4. Kirby
    #### Kitchen Simulator - "Ultimate Kitchen"
     This program is run in the command line and allows the user to choose as many menu items as they would like from the scrollable list and
     then, after choosing to finish their selection, the program simulates a real kitchen, where only so many meals are able to be worked on at
@@ -28,7 +29,6 @@ A group project assignment covering an unfamilliar language, Go.
     onwards once the first, second, third, and so on, meals have been completed. This program was built with showcasing Go's ability to easily
     and effectively perform concurrency and is displayed via the print statements that show when each meal order item is completed and how long
     the order item took to complete in total.
-5. Kirby
 6. Lucas
 
 ### Substantive

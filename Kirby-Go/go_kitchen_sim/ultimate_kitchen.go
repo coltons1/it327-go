@@ -145,17 +145,3 @@ func cookOrder(orderItem meal, wg *sync.WaitGroup, channel chan struct{}, origSt
 	// to hold up the channel
 	<-channel
 }
-
-// func firstfunc(numRuns int, wg *sync.WaitGroup) {
-// 	fmt.Println("Printing i values:")
-// 	fmt.Printf("The current value of i is: ")
-// 	var max int = 0
-// 	for i := 0; i < numRuns; i++ {
-// 		//fmt.Printf("%d ", i)
-// 		//Add together the current i value to an accumulator
-// 		max += i
-// 	}
-
-// 	fmt.Println(max)
-// 	defer wg.Done()
-// }

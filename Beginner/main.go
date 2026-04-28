@@ -22,17 +22,13 @@ var results = []string{}
 func main() {
 	fmt.Println("\t-----------+ Non-Concurrent Test +-----------")
 	nonconcMain()
-
 	results = nil
 	results = []string{}
-
 	fmt.Println("\n\t-------------+ Concurrent Test +-------------")
 	concMain()
-
 }
 
 func dbCall(i int) {
-
 	var delay float32 = 2000
 	time.Sleep(time.Duration(delay) * time.Millisecond)
 	fmt.Println("The result from the database is: ", dbData[i])
@@ -51,7 +47,6 @@ func concMain() {
 	wg.Wait()
 	fmt.Printf("\nTotal Execution Time: %v", time.Since(t0))
 	fmt.Printf("\nThe results are %v", results)
-
 }
 
 func nonconcMain() {

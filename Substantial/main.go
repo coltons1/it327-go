@@ -127,8 +127,25 @@ func removeHelper(tree *BST, node *Node, dataToRemove int) (*Node, error) {
 	return node, nil
 }
 
-func Get(tree *BST, key int) int {
-	return 0
+func Get(tree *BST, targetData int) (*Node, error) {
+	if tree == nil {
+		return nil, errors.New("Tree does not exist. ")
+	}
+
+	var currNode *Node = tree.root
+	for currNode != nil {
+		if currNode.data == targetData {
+			return currNode, nil
+		}
+		if targetData < currNode.data {
+			// go to the left
+			currNode = currNode.left
+		} else if targetData > currNode.data {
+			// go to the right
+			currNode = currNode.right
+		}
+	}
+	return nil, errors.New("Could not find node with that data")
 }
 
 func hasKey(tree *BST, key int) bool {

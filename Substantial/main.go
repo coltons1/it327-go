@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -9,108 +10,152 @@ import (
 //--------+--------//
 
 type Node struct {
-	key         int
-	height      int
 	data        int
 	left, right *Node
 }
 
-func newNode(newKey int, newData int) *Node {
+func newNode(newData int) *Node {
 	return &Node{
-		key:   newKey,
 		data:  newData,
 		left:  nil,
 		right: nil,
 	}
 }
 
-func updateHeight(node *Node) int {
-	var l int = 0
-	var r int = 0
-	var height int = 0
-	if node.left == nil {
-		l = 0
-	} else {
-		l = node.left.height
-	}
+//-------------+-------------//
+//     Binary Search Tree    //
+//-------------+-------------//
 
-	if node.right == nil {
-		r = 0
-	} else {
-		r = node.right.height
-	}
-
-	if l > r {
-		height = 1 + l
-	} else {
-		height = 1 + r
-	}
-	return height
-}
-
-//--------+--------//
-//     AVL Tree    //
-//--------+--------//
-
-type AVLTree struct { // do we want to make it w generics?
+type BST struct { // do we want to make it w generics?
 	root *Node
 
-	newTree func() *AVLTree
-	insert  func(*AVLTree, int, int)
-	remove  func(*AVLTree, int)
-	get     func(*AVLTree, int) int
-	hasKey  func(*AVLTree, int) bool
-	size    func(*AVLTree) int
-	height  func(*AVLTree) int
-	maxKey  func(*AVLTree) int
-	minKey  func(*AVLTree) int
-	max     func(*AVLTree) *Node
-	min     func(*AVLTree) *Node
+	NewTree      func() *BST
+	Insert       func(*BST, int, int)
+	insertHelper func(*BST, *Node, *Node) (*Node, error)
+	Remove       func(*BST, int)
+	Get          func(*BST, int) int
+	size         func(*BST) int
+	height       func(*BST) int
+	max          func(*BST) *Node
+	min          func(*BST) *Node
 }
 
-func newTree() *AVLTree {
-	return &AVLTree{
+func NewTree() *BST {
+	return &BST{
 		root: nil,
 	}
 }
 
-func insert(tree *AVLTree, key int, data int) {
-
+func Insert(tree *BST, data int) {
+	var node *Node = newNode(data)
+	tree.root, _ = insertHelper(tree, nil, node)
 }
 
-func remove(tree *AVLTree, key int) {
-
+func insertHelper(tree *BST, currNode *Node, newNode *Node) (*Node, error) {
+	// if the root of the tree is nil, set the tree to the new node
+	if tree.root == nil {
+		tree.root = newNode
+		return tree.root, nil
+	}
+	// if the current node is nil, then set it there
+	if currNode == nil {
+		currNode = newNode
+		return currNode, nil
+	} else {
+		//tree's root is not null so continue down the tree
+		if newNode.data >= currNode.data {
+			// go to the right
+			insertHelper(tree, currNode.right, newNode)
+		} else if newNode.data < currNode.data {
+			// go to the left
+			insertHelper(tree, currNode.left, newNode)
+		}
+	}
+	return newNode, errors.New("Insertion failed, could not find proper placement.")
 }
 
-func get(tree *AVLTree, key int) int {
+func Remove(tree *BST, data int) (int, error) {
+	// call remove helper
+	newRoot, err := removeHelper(tree, tree.root, data)
+	// if the removehelper errors out, fail
+	if err != nil {
+		return 0, err
+	}
+	// if it did not error out, return the removed data
+	tree.root = newRoot
+	return data, nil
+}
+
+func removeHelper(tree *BST, node *Node, dataToRemove int) (*Node, error) {
+	// cannot find the value to be removed
+	if node == nil {
+		return nil, errors.New("Value not found in tree.")
+	}
+
+	// searching for the piece of data to be removed
+	var err error
+	if dataToRemove < node.data {
+		node.left, err = removeHelper(tree, node.left, dataToRemove)
+		if err != nil {
+			return nil, err
+		}
+	} else if node.data < dataToRemove {
+		node.right, err = removeHelper(tree, node.right, dataToRemove)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		// node with 0 or 1 child
+		if node.left == nil {
+			return node.right, nil
+		}
+		if node.right == nil {
+			return node.left, nil
+		}
+
+		// node with 2 children
+		curr := node.right
+		for curr.left != nil {
+			curr = curr.left
+		}
+		node.data = curr.data
+		node.right, err = removeHelper(tree, node.right, curr.data)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return node, nil
+}
+
+func Get(tree *BST, key int) int {
 	return 0
 }
 
-func hasKey(tree *AVLTree, key int) bool {
+func hasKey(tree *BST, key int) bool {
 	return false
 }
 
-func size(tree *AVLTree) int {
+func size(tree *BST) int {
 	return 0
 }
 
-func height(tree *AVLTree) int {
+func height(tree *BST) int {
 	return 0
 }
 
-func maxKey(tree *AVLTree) int {
+func maxKey(tree *BST) int {
 	return 0
 }
 
-func minKey(tree *AVLTree) int {
+func minKey(tree *BST) int {
 	return 0
 }
 
-func max(tree *AVLTree) *Node {
+func max(tree *BST) *Node {
 	return nil
 }
 
-func min(tree *AVLTree) *Node {
+func min(tree *BST) *Node {
 	return nil
 }
 

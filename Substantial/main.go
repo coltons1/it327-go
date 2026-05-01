@@ -6,7 +6,7 @@ import (
 )
 
 //--------+--------//
-//  AVL Tree Node  //
+//  BST Tree Node  //
 //--------+--------//
 
 type Node struct {
@@ -33,38 +33,32 @@ type BST struct { // do we want to make it w generics?
 
 func NewTree() *BST {
 	return &BST{
-		root: nil,
+		root:     nil,
+		treeSize: 0,
 	}
 }
 
 func (tree *BST) Insert(data int) {
 	var node *Node = newNode(data)
-	tree.root, _ = tree.insertHelper(nil, node)
+	tree.root, _ = tree.insertHelper(tree.root, node)
 }
 
 func (tree *BST) insertHelper(currNode *Node, newNode *Node) (*Node, error) {
-	// if the root of the tree is nil, set the tree to the new node
-	if tree.root == nil {
-		tree.root = newNode
-		tree.treeSize++
-		return tree.root, nil
-	}
 	// if the current node is nil, then set it there
 	if currNode == nil {
-		currNode = newNode
 		tree.treeSize++
-		return currNode, nil
+		return newNode, nil
 	} else {
 		//tree's root is not null so continue down the tree
 		if newNode.data >= currNode.data {
 			// go to the right
-			tree.insertHelper(currNode.right, newNode)
+			currNode.right, _ = tree.insertHelper(currNode.right, newNode)
 		} else if newNode.data < currNode.data {
 			// go to the left
-			tree.insertHelper(currNode.left, newNode)
+			currNode.left, _ = tree.insertHelper(currNode.left, newNode)
 		}
 	}
-	return newNode, errors.New("Insertion failed, could not find proper placement.")
+	return currNode, nil
 }
 
 func (tree *BST) Remove(data int) (int, error) {
@@ -182,12 +176,21 @@ func (tree *BST) height(node *Node) int {
 	}
 }
 
-func (tree *BST) MaxKey() int {
-	return tree.Max().data
+func (tree *BST) MaxKey() (int, error) {
+	node := tree.Max()
+	if node == nil {
+		return 0, errors.New("Tree is empty.")
+	}
+	return node.data, nil
+
 }
 
-func (tree *BST) MinKey() int {
-	return tree.Min().data
+func (tree *BST) MinKey() (int, error) {
+	node := tree.Min()
+	if node == nil {
+		return 0, errors.New("Tree is empty.")
+	}
+	return node.data, nil
 }
 
 func (tree *BST) Max() *Node {
@@ -216,6 +219,25 @@ func (tree *BST) Min() *Node {
 	return currNode
 }
 
+func (tree *BST) inorder(node *Node) {
+	if node == nil {
+		return
+	}
+	tree.inorder(node.left)
+	fmt.Printf("%v\t", node.data)
+	tree.inorder(node.right)
+}
+
+func (tree *BST) printTree() {
+	tree.inorder(tree.root)
+}
+
 func main() {
 	fmt.Println("Hello World")
+	var tree *BST = NewTree()
+	tree.Insert(10)
+	tree.Insert(12)
+	tree.Insert(1)
+	tree.printTree()
+
 }

@@ -8,3 +8,7 @@ With a slice of 8 prenamed hotels, their ratings over the span of 10 years are r
 Once all ratings are generated, the program ten runs tests on the slice of hotels.
 -To be a part of the best hotels, the hotel must have a rating of 95 or above. 
 -To be a part of the worst hotels, the hotel must have the most amount of low ratings out of every other hotel.
+
+TO RUN:
+1) Chnage directory to be within project folder.
+2) Simply type this into terminal:  go run .

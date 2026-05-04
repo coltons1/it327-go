@@ -240,16 +240,17 @@ func (tree *BST) PrintTree() {
 	tree.inorderPrint(tree.root)
 }
 
-func (tree *BST) InorderArr() (arr []*Node) {
+func (tree *BST) InorderArr() []*Node {
 	return tree.inorder(tree.root)
 }
 
-func (tree *BST) inorder(node *Node) (arr []*Node) {
+func (tree *BST) inorder(node *Node) []*Node {
 	if node == nil {
-		return
+		return nil
 	}
-	tree.inorder(node.left)
+	var arr []*Node
+	arr = append(arr, tree.inorder(node.left)...)
 	arr = append(arr, node)
-	tree.inorder(node.right)
+	arr = append(arr, tree.inorder(node.right)...)
 	return arr
 }

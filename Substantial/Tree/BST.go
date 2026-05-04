@@ -22,6 +22,14 @@ func newNode(newData int) *Node {
 	}
 }
 
+func (node *Node) GetData() (int, error) {
+	if node == nil {
+		return 0, errors.New("Node is nil.")
+	}
+	retData := node.data
+	return retData, nil
+}
+
 //-------------+-------------//
 //     Binary Search Tree    //
 //-------------+-------------//
@@ -219,15 +227,29 @@ func (tree *BST) Min() *Node {
 	return currNode
 }
 
-func (tree *BST) inorder(node *Node) {
+func (tree *BST) inorderPrint(node *Node) {
+	if node == nil {
+		return
+	}
+	tree.inorderPrint(node.left)
+	fmt.Printf("%v\t", node.data)
+	tree.inorderPrint(node.right)
+}
+
+func (tree *BST) PrintTree() {
+	tree.inorderPrint(tree.root)
+}
+
+func (tree *BST) InorderArr() (arr []*Node) {
+	return tree.inorder(tree.root)
+}
+
+func (tree *BST) inorder(node *Node) (arr []*Node) {
 	if node == nil {
 		return
 	}
 	tree.inorder(node.left)
-	fmt.Printf("%v\t", node.data)
+	arr = append(arr, node)
 	tree.inorder(node.right)
-}
-
-func (tree *BST) PrintTree() {
-	tree.inorder(tree.root)
+	return arr
 }

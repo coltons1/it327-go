@@ -1,11 +1,18 @@
 # Running Instructions
 
-## 1. Clone the Repository
-    In your current folder you want the repository to be stored, run ' git clone https://github.com/coltons1/it327-go.git '
-    Ensure you are in the newly cloned repository folder, ' cd it327-go '
-    Run ' git pull ' to get the most up to date version of the programs.
+## 1. Install Go
+    Go to ' https://go.dev/ '.
+    Select Download.
+    Choose your version: Windows, macOS (arm64 or x86-64), or Linux.
+    Further installation instructions can be found on ' https://go.dev/doc/install '.
+    Use ' go version ' to confirm your installation. 
 
-## 2. For each program
+## 2. Download the programs
+    EXTRACT all the files included in this zip file to some folder.
+    Go to the new folder where the files were extracted to and open a terminal session there. 
+    Refer to the following instructions. 
+
+## 3. For each program
 
 ### Beginner
     ' cd Beginner '
@@ -14,12 +21,12 @@
     ' cd ../ '
 ### Brad-Go
     ' cd Brad-Go '
-    ' go run Driver.go '
+    ' go run HotelProgram.go '
     The results will be printed to the terminal, this is Brad's intermediate program.
     ' cd ../ '
 ### Colton-Go
     ' cd Colton-Go '
-    ' go build -o "cli" '
+    ' go build -o "cli.exe" ' (for windows)
     This command builds the most recent version of the CLI tool. 
     ' ./cli help '
     Returns a list of all commands that you can use, (./cli addExpense, ./cli listExpenses, ./cli rmExpense, or ./cli updateExpense)

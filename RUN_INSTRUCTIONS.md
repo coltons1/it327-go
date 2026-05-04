@@ -27,6 +27,7 @@
 ### Colton-Go
     ' cd Colton-Go '
     ' go build -o "cli.exe" ' (for windows)
+    ' go build -o "cli" ' (for mac)
     This command builds the most recent version of the CLI tool. 
     ' ./cli help '
     Returns a list of all commands that you can use, (./cli addExpense, ./cli listExpenses, ./cli rmExpense, or ./cli updateExpense)
